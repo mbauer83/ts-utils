@@ -17,6 +17,6 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "./node_modules/typescript/bin/tsc"
   }
 }
