@@ -3,6 +3,7 @@
   "version": "v0.1.0",
   "type": "module",
   "types": "src/main.d.ts",
+  "repository": "https://github.com/MBauer83/ts-utils.git",
   "dependencies": {
     "ts-node": "^10.9.1"
   },
