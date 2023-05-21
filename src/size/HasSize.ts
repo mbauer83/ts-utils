@@ -1,4 +1,4 @@
-import { Size } from "./size";
+import { Size } from "./size.js";
 
 export interface HasSize {
     getSize(): Size;

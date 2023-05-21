@@ -1,4 +1,4 @@
-import { EqualityComparable } from "../comparison/equality";
-import { JSONSerializable } from "../serialization/JSONSerializable";
+import { EqualityComparable } from "../comparison/equality.js";
+import { JSONSerializable } from "../serialization/JSONSerializable.js";
 
 export interface Id extends JSONSerializable, EqualityComparable<Id> {}

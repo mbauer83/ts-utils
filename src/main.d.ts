@@ -1,18 +1,18 @@
-import { EqualityComparable, EqualityComparison, EqualityComparator } from "./comparison/equality";
-import { conditionalDo } from "./controlFlow/conditionalDo";
-import { sha1Hex, sha1Buffer } from "./hashing/sha1";
-import { Id } from "./identity/Id";
-import { IdEqualityComparable } from "./identity/equality";
-import { StringIdentity } from "./identity/StringIdentity";
-import { Serializable } from "./serialization/Serializable";
-import { JSONSerializable } from "./serialization/JSONSerializable";
-import { SerializationEqualityComparable } from "./serialization/equality";
-import { serialize } from "./serialization/serialize";
-import { CountablyInfinite, UncountablyInfinite, Size, compareSize, sizesAreEqual } from "./size/size";
-import { HasSize } from "./size/HasSize";
-import { HasCount } from "./size/HasCount";
-import { Path } from "./objectPath/Path";
-import { PropertyType } from "./objectPath/PropertyType";
+import { EqualityComparable, EqualityComparison, EqualityComparator } from "./comparison/equality.js";
+import { conditionalDo } from "./controlFlow/conditionalDo.js";
+import { sha1Hex, sha1Buffer } from "./hashing/sha1.js";
+import { Id } from "./identity/Id.js";
+import { IdEqualityComparable } from "./identity/equality.js";
+import { StringIdentity } from "./identity/StringIdentity.js";
+import { Serializable } from "./serialization/Serializable.js";
+import { JSONSerializable } from "./serialization/JSONSerializable.js";
+import { SerializationEqualityComparable } from "./serialization/equality.js";
+import { serialize } from "./serialization/serialize.js";
+import { CountablyInfinite, UncountablyInfinite, Size, compareSize, sizesAreEqual } from "./size/size.js";
+import { HasSize } from "./size/HasSize.js";
+import { HasCount } from "./size/HasCount.js";
+import { Path } from "./objectPath/Path.js";
+import { PropertyType } from "./objectPath/PropertyType.js";
 
 export {
     EqualityComparable,

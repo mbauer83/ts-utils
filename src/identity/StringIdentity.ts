@@ -1,4 +1,4 @@
-import { Id } from "./Id";
+import { Id } from "./Id.js";
 
 export class StringIdentity implements Id {
     constructor(public readonly id: string) {}

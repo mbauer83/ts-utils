@@ -1,5 +1,5 @@
-import { EqualityComparable } from "../comparison/equality";
-import { Id } from "./Id";
+import { EqualityComparable } from "../comparison/equality.js";
+import { Id } from "./Id.js";
 
 export interface IdEqualityComparable<in T extends {[key: string]: Id}> extends EqualityComparable<T> {
     id: Id;

@@ -1,4 +1,4 @@
-import { Path } from "./Path";
+import { Path } from "./Path.js";
 
 export type PropertyType<
   S extends { [key: string|number|symbol]: any },

@@ -1,6 +1,6 @@
 {
   "name": "@mbauer83/ts-utils",
-  "version": "v0.1.0",
+  "version": "v0.2.0",
   "type": "module",
   "types": "src/main.d.ts",
   "repository": "https://github.com/mbauer83/ts-utils.git",
