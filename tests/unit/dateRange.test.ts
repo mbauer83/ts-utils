@@ -140,4 +140,37 @@ describe('test DateRange', () => {
         expect(DateRange.empty.fromDate).toBe(undefined);
         expect(DateRange.empty.toDate).toBe(undefined);
     })
+
+    test('hasLowerBound reports correctly', () => {
+        expect(new DateRange().hasLowerBound()).toBe(false);
+        expect(new DateRange(new Date()).hasLowerBound()).toBe(true);
+        expect(new DateRange(undefined, new Date()).hasLowerBound()).toBe(false);
+        expect(new DateRange(new Date(), new Date()).hasLowerBound()).toBe(true);
+    })
+
+    test('hasUpperBound reports correctly', () => {
+        expect(new DateRange().hasUpperBound()).toBe(false);
+        expect(new DateRange(undefined, new Date()).hasUpperBound()).toBe(true);
+        expect(new DateRange(new Date(), undefined).hasUpperBound()).toBe(false);
+        expect(new DateRange(new Date(), new Date()).hasUpperBound()).toBe(true);
+    })
+
+    test('toString returns correct string', () => {
+        // Should use '(' / ')' for exclusive bounds and '[' / ']' for inclusive bounds.
+        // Should use '...' for undefined bounds and ISO 8601 for defined bounds.
+        expect(new DateRange().toString()).toBe('(..., ...)');
+        expect(new DateRange(undefined, undefined, true, true).toString()).toBe('[..., ...]');
+        const currDate = new Date();
+        const expectedDateString = currDate.toISOString();
+        expect(new DateRange(currDate).toString()).toBe(`(${expectedDateString}, ...)`);
+        expect(new DateRange(undefined, currDate).toString()).toBe(`(..., ${expectedDateString})`);
+        expect(new DateRange(currDate, undefined, true, true).toString()).toBe(`[${expectedDateString}, ...]`);
+        expect(new DateRange(undefined, currDate, true, true).toString()).toBe(`[..., ${expectedDateString}]`);
+        expect(new DateRange(currDate, undefined, true, false).toString()).toBe(`[${expectedDateString}, ...)`);
+        expect(new DateRange(currDate, undefined, false, true).toString()).toBe(`(${expectedDateString}, ...]`);
+        expect(new DateRange(undefined, currDate, true, false).toString()).toBe(`[..., ${expectedDateString})`);
+        expect(new DateRange(undefined, currDate, false, true).toString()).toBe(`(..., ${expectedDateString}]`);        
+        expect(new DateRange(currDate, currDate).toString()).toBe(`(${expectedDateString}, ${expectedDateString})`);
+        expect(new DateRange(currDate, currDate, true, true).toString()).toBe(`[${expectedDateString}, ${expectedDateString}]`);
+    });
 });

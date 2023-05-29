@@ -41,11 +41,11 @@ export class DateRange {
     }
 
     hasLowerBound(): boolean {
-        return this.fromDate !== null;
+        return this.fromDate !== undefined;
     }
 
     hasUpperBound(): boolean {
-        return this.toDate !== null;
+        return this.toDate !== undefined;
     }
 
     isInRange(dateOrMillisecondTimestamp: Date | number): boolean {
@@ -55,9 +55,9 @@ export class DateRange {
 
     toString(): string {
         const lowerBoundDelimiter = this.lowerBoundIsInclusive ? '[' : '(';
-        const lowerBoundPart = lowerBoundDelimiter + (this.hasLowerBound() ? this.fromDate!.toString() : '...') + ', ';
+        const lowerBoundPart = lowerBoundDelimiter + (this.hasLowerBound() ? this.fromDate!.toISOString() : '...') + ', ';
         const upperBoundDelimiter = this.upperBoundIsInclusive ? ']' : ')';
-        const upperBoundPart = (this.hasUpperBound() ? this.toDate!.toString() : '...') + upperBoundDelimiter;
+        const upperBoundPart = (this.hasUpperBound() ? this.toDate!.toISOString() : '...') + upperBoundDelimiter;
         return lowerBoundPart + upperBoundPart;
     }
 }
