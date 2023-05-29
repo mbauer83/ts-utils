@@ -2,14 +2,15 @@ export class DateRange {
     private readonly asMillisecondTimestamp: (dateOrMs: Date | number) => number;
     private readonly satisfiesLowerBound: (date: Date | number) => boolean;
     private readonly satisfiesUpperBound: (date: Date | number) => boolean;
+    public static readonly empty = new DateRange();
 
     constructor(
-        public readonly fromDate: Date | null,
-        public readonly toDate: Date | null,
+        public readonly fromDate: Date | undefined = undefined,
+        public readonly toDate: Date | undefined = undefined,
         public readonly lowerBoundIsInclusive: boolean = false,
         public readonly upperBoundIsInclusive: boolean = false,
     ) {
-        if (fromDate !== null && toDate !== null) {
+        if (fromDate !== undefined && toDate !== undefined) {
             const d1 = fromDate.getTime() + '';
             const d2 = toDate.getTime() + '';
             if (fromDate.getTime() > toDate.getTime()) {
@@ -25,14 +26,14 @@ export class DateRange {
         this.asMillisecondTimestamp = (dateOrMs: Date | number) => (dateOrMs instanceof Date) ? dateOrMs.getTime() : dateOrMs;
 
         this.satisfiesLowerBound
-            = (date: Date | number) => (this.fromDate === null)
+            = (date: Date | number) => (this.fromDate === undefined)
                 ? true
                 : this.lowerBoundIsInclusive
                     ? this.asMillisecondTimestamp(date) >= this.fromDate.getTime()
                     : this.asMillisecondTimestamp(date) > this.fromDate.getTime();
 
         this.satisfiesUpperBound
-            = (date: Date | number) => (this.toDate === null)
+            = (date: Date | number) => (this.toDate === undefined)
             ? true
             : this.upperBoundIsInclusive
                 ? this.asMillisecondTimestamp(date) <= this.toDate.getTime()

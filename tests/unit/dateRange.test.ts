@@ -6,7 +6,7 @@ describe('test DateRange', () => {
     test('Open DateRange can be constructed', () => {
         let dateRange: DateRange | null = null;
         expect(() => {
-          dateRange = new DateRange(null, null)
+          dateRange = new DateRange()
         }).not.toThrowError()
         expect(dateRange).toBeInstanceOf(DateRange);
     })
@@ -14,7 +14,7 @@ describe('test DateRange', () => {
     test('Left-open DateRange can be constructed', () => {
         let dateRange: DateRange | null = null;
         expect(() => {
-            dateRange = new DateRange(null, new Date())
+            dateRange = new DateRange(undefined, new Date())
         }).not.toThrowError()
         expect(dateRange).toBeInstanceOf(DateRange);
     })
@@ -22,7 +22,7 @@ describe('test DateRange', () => {
     test('Right-open DateRange can be constructed', () => {
         let dateRange: DateRange | null = null;
         expect(() => {
-            dateRange = new DateRange(new Date(), null)
+            dateRange = new DateRange(new Date(), undefined)
         }).not.toThrowError()
         expect(dateRange).toBeInstanceOf(DateRange);
     })
@@ -56,28 +56,28 @@ describe('test DateRange', () => {
     })
 
     test('Any timestamp is within [..., ...]', () => {
-        const range = new DateRange(null, null);
+        const range = new DateRange();
         expect(range.isInRange(0));
         expect(range.isInRange((new Date()).getTime()));
         expect(range.isInRange(Number.MAX_SAFE_INTEGER));
     })
 
     test('Any Date is within [..., ...]', () => {
-        const range = new DateRange(null, null);
+        const range = new DateRange();
         expect(range.isInRange(new Date(0)));
         expect(range.isInRange(new Date()));
         expect(range.isInRange(new Date(Number.MAX_SAFE_INTEGER)));
     })
 
     test('Any timestamp is within (..., ...)', () => {
-        const range = new DateRange(null, null, true, true);
+        const range = new DateRange(undefined, undefined, true, true);
         expect(range.isInRange(0));
         expect(range.isInRange((new Date()).getTime()));
         expect(range.isInRange(Number.MAX_SAFE_INTEGER));
     })
 
     test('Any Date is within (..., ...)', () => {
-        const range = new DateRange(null, null, true, true);
+        const range = new DateRange(undefined, undefined, true, true);
         expect(range.isInRange(new Date(0)));
         expect(range.isInRange(new Date()));
         expect(range.isInRange(new Date(Number.MAX_SAFE_INTEGER)));
@@ -87,7 +87,7 @@ describe('test DateRange', () => {
         const date = new Date();
         const earlierDate = new Date(date.getTime() - 100);
         const laterDate = new Date(date.getTime() + 100);
-        const range = new DateRange(date, null, true);
+        const range = new DateRange(date, undefined, true);
         expect(range.isInRange(date)).toBe(true);
         expect(range.isInRange(laterDate)).toBe(true);
         expect(range.isInRange(earlierDate)).toBe(false);
@@ -100,7 +100,7 @@ describe('test DateRange', () => {
         const date = new Date();
         const earlierDate = new Date(date.getTime() - 100);
         const laterDate = new Date(date.getTime() + 100);
-        const range = new DateRange(date, null);
+        const range = new DateRange(date, undefined);
         expect(range.isInRange(date)).toBe(false);
         expect(range.isInRange(laterDate)).toBe(true);
         expect(range.isInRange(earlierDate)).toBe(false);
@@ -113,7 +113,7 @@ describe('test DateRange', () => {
         const date = new Date();
         const earlierDate = new Date(date.getTime() - 100);
         const laterDate = new Date(date.getTime() + 100);
-        const range = new DateRange(null, date, false, true);
+        const range = new DateRange(undefined, date, false, true);
         expect(range.isInRange(date)).toBe(true);
         expect(range.isInRange(laterDate)).toBe(false);
         expect(range.isInRange(earlierDate)).toBe(true);
@@ -126,12 +126,18 @@ describe('test DateRange', () => {
         const date = new Date();
         const earlierDate = new Date(date.getTime() - 100);
         const laterDate = new Date(date.getTime() + 100);
-        const range = new DateRange(null, date);
+        const range = new DateRange(undefined, date);
         expect(range.isInRange(date)).toBe(false);
         expect(range.isInRange(laterDate)).toBe(false);
         expect(range.isInRange(earlierDate)).toBe(true);
         expect(range.isInRange(date.getTime())).toBe(false);
         expect(range.isInRange(laterDate.getTime())).toBe(false);
         expect(range.isInRange(earlierDate.getTime())).toBe(true);
+    })
+
+    test('static empty member is empty DateRange', () => {
+        expect(DateRange.empty).toBeInstanceOf(DateRange);
+        expect(DateRange.empty.fromDate).toBe(undefined);
+        expect(DateRange.empty.toDate).toBe(undefined);
     })
 });
